@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import "../../assets/css/reset.css"
 import "./style.css"
 import MovieListing from "../MovieListing/MovieListing"
+import MovieSessions from "../MovieSessions/MovieSessions"
 
 export default function App(){
   return (
@@ -12,6 +13,7 @@ export default function App(){
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MovieListing />} />
+          <Route path="/sessoes" element={<MovieSessions />} />
         </Routes>
       </BrowserRouter>
     </>

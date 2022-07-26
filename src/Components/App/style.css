@@ -8,6 +8,10 @@ body, *{
   box-sizing: border-box;
 }
 
+body{
+  color: #293845
+}
+
 header {
   width: 100%;
   height: 67px;

@@ -1,4 +1,6 @@
 import "./style.css"
+import MovieSessions from "../MovieSessions/MovieSessions"
+import {Link} from "react-router-dom"
 
 export default function MovieListing(){  
   return (<>
@@ -6,9 +8,11 @@ export default function MovieListing(){
       <h2>Selecione o filme</h2>
     </div>
     <div className="movieContainer">
-      <div className="movie">
-        <img src="https://miro.medium.com/max/1400/1*AIMRcE2kVKCFlx8vVSrU9w.jpeg" alt="bacurau"/>
-      </div>
+      <Link to="/sessoes">
+        <div className="movie">
+          <img src="https://miro.medium.com/max/1400/1*AIMRcE2kVKCFlx8vVSrU9w.jpeg" alt="bacurau"/>
+        </div>
+      </Link>
       <div className="movie">
         <img src="https://img.elo7.com.br/product/original/269D300/big-poster-nos-filme-lo01-tamanho-90x60-cm-presente-geek.jpg" alt="nós"/>
       </div>

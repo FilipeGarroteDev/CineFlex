@@ -3,18 +3,22 @@ import "../../assets/css/reset.css"
 import "./style.css"
 import MovieListing from "../MovieListing/MovieListing"
 import MovieSessions from "../MovieSessions/MovieSessions"
+import SeatsPage from "../SeatsPage/SeatsPage"
 
 export default function App(){
   return (
     <>
-      <header>
-        <h1>CINEFLEX</h1>
-      </header>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MovieListing />} />
-          <Route path="/sessoes" element={<MovieSessions />} />
-        </Routes>
+        <header>
+          <h1>CINEFLEX</h1>
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" element={<MovieListing />} />
+            <Route path="/sessoes" element={<MovieSessions />} />
+            <Route path="/assentos" element={<SeatsPage />} />
+          </Routes>
+        </main>
       </BrowserRouter>
     </>
   )

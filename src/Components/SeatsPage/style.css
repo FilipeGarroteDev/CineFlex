@@ -1,0 +1,36 @@
+.subtitle {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+.seats{
+  width: 325px;
+  height: 300px;
+  display: flex;
+}
+
+.seatMaps{
+  width: 325px;
+  height: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.seat{
+  width: 26px;
+  height: 26px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #C3CFD9;
+  border: 1px solid #808F9D;
+  font-size: 11px;
+  margin: 0 3.5px 26px 3.5px;
+}

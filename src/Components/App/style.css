@@ -12,6 +12,10 @@ body{
   color: #293845
 }
 
+main{
+  padding: 0 23px;
+}
+
 header {
   width: 100%;
   height: 67px;

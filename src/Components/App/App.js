@@ -6,6 +6,9 @@ import MovieSessions from "../MovieSessions/MovieSessions"
 import SeatsPage from "../SeatsPage/SeatsPage"
 
 export default function App(){
+
+  
+
   return (
     <>
       <BrowserRouter>

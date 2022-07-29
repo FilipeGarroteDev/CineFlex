@@ -1,12 +1,12 @@
 import "./style.css"
 
-export default function MovieSessions(){  
+export default function Footer({title, posterURL}){  
   return (
     <footer>
       <div className="movieIcon">
-        <img src="https://miro.medium.com/max/1400/1*AIMRcE2kVKCFlx8vVSrU9w.jpeg" alt="bacurau"/>
+        <img src={posterURL} alt={title}/>
       </div>
-      <h4>Bacurau</h4>
+      <h4>{title}</h4>
     </footer>  
   )
 }

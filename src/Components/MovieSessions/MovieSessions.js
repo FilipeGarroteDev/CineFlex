@@ -7,6 +7,7 @@ import axios from "axios"
 export default function MovieSessions(){
   const {idFilme} = useParams()
   const [timetable, setTimetable] = useState([])
+  const [movies, setMovies] = useState([])
 
   console.log(timetable)
 
@@ -14,6 +15,7 @@ export default function MovieSessions(){
     
     const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/movies/${idFilme}/showtimes`)
     promise.then((res) => {
+      setMovies(res.data)
       setTimetable(res.data.days)
     })
   }, [])
@@ -32,10 +34,11 @@ export default function MovieSessions(){
             firstSessionId={firstSessionId} 
             lastSession={lastSession} 
             lastSessionId ={lastSessionId}
+            movieId={movies.id}
           />)
       })}
     </div>
-    <Footer />
+    <Footer title={movies.title} posterURL={movies.posterURL} />
   </>)
 }
 
@@ -43,14 +46,15 @@ function Session(
   {weekday,
   date,
   firstSession,
-  lastSession}){
+  lastSession,
+  movieId}){
 
   return (
     
       <div className="session">
         <h3>{`${weekday} - ${date}`}</h3>
         <div className="schedule">
-          <Link to="/assentos">
+          <Link to={`/assentos/${movieId}`}>
             <div className="timeSession">{firstSession}</div>
           </Link>
           <Link to="/assentos">

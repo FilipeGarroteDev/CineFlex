@@ -7,7 +7,6 @@ import SeatsPage from "../SeatsPage/SeatsPage"
 
 export default function App(){
 
-  
 
   return (
     <>
@@ -18,7 +17,7 @@ export default function App(){
         <main>
           <Routes>
             <Route path="/" element={<MovieListing />} />
-            <Route path="/sessoes" element={<MovieSessions />} />
+            <Route path="/sessoes/:idFilme" element={<MovieSessions />} />
             <Route path="/assentos" element={<SeatsPage />} />
           </Routes>
         </main>

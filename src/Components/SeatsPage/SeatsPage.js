@@ -27,7 +27,12 @@ export default function SeatsPage(){
     </div>
     <div className="seats">
       <ul className="seatMaps">
-      {seatList.map(({id, name, isAvailable}) => <Seat key={id} name={name} isAvailable={isAvailable}/>)}
+      {seatList.map(({id, name, isAvailable}) => 
+        isAvailable ? 
+          <SeatAvailable key={id} name={name} isAvailable={isAvailable}/> 
+        :
+          <SeatUnavailable key={id} name={name} isAvailable={isAvailable}/>)
+      }
       </ul>
       
       <label className="seatsSubtitle">
@@ -49,33 +54,24 @@ export default function SeatsPage(){
   </>)
 }
 
-function Seat({id, name, isAvailable}){
+function SeatAvailable({name}){
   const[seatStatus, setSeatStatus] = useState(false)
   const[seatClass, setSeatClass] = useState("seat")
 
+  return(
+  <>
+    <div className={seatClass} onClick={() => setSeatClass("seat selected")}>{name}</div> 
+  </>
+  )
+}
+
+function SeatUnavailable({name}){
+  const[seatStatus, setSeatStatus] = useState(false)
+  const[seatClass, setSeatClass] = useState("seat")
 
   return(
   <>
-    <div className="seat" onClick={() => setSeatStatus(!seatStatus)}>{name}</div> 
+    <div className="seat unavailable" onClick={() => alert("sai daí, jão")}>{name}</div> 
   </>
   )
-    
-
 }
-
-// function Seat({seatList}){
-//   const[seatStatus, setSeatStatus] = useState(false)
-//   const[seatClass, setSeatClass] = useState("seat")
-
-
-//   return(
-//   <>
-//       seat.isAvailable ? 
-//         <div key={seat.id} className="seat" onClick={() => setSeatStatus(!seatStatus)}>{seat.name}</div> 
-//       : 
-//         <div key={seat.id} className="seat unavailable" onClick={() => alert("esse assento não, jão!")}>{seat.name}</div>
-//   </>
-//   )
-    
-
-// }

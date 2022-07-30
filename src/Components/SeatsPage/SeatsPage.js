@@ -1,12 +1,24 @@
 import "./style.css"
+import {useState, useEffect} from "react"
 import Footer from "../Footer/Footer.js"
-import React from "react"
+import { useParams, useNavigate } from "react-router-dom"
+import axios from "axios"
 
 
 
-export default function MovieSessions(){
+export default function SeatsPage(){
+  const {idSessao} = useParams();
+  const[seatList, setSeatList] = useState([]);
+  const[movie, setMovie] = useState([])
 
-  let x = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50]
+  useEffect(() => {
+    const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`)
+    promise.then(res => {
+      setSeatList(res.data.seats)
+      setMovie(res.data.movie)
+    })
+  }, [])
+  
 
 
   return (<>
@@ -15,10 +27,7 @@ export default function MovieSessions(){
     </div>
     <div className="seats">
       <ul className="seatMaps">
-        {x.map(value => 
-          <>
-            <div className="seat">{value}</div>
-          </>)}
+      {seatList.map(({id, name, isAvailable}) => <Seat key={id} name={name} isAvailable={isAvailable}/>)}
       </ul>
       
       <label className="seatsSubtitle">
@@ -31,11 +40,42 @@ export default function MovieSessions(){
           <span>Disponível</span>
         </div>
         <div className="option">
-          <div className="seat unavaiable"></div>
+          <div className="seat unavailable"></div>
           <span>Indisponível</span>
         </div>
       </label>
     </div>
-    <Footer />
+    <Footer title={movie.title} posterURL={movie.posterURL}/>
   </>)
 }
+
+function Seat({id, name, isAvailable}){
+  const[seatStatus, setSeatStatus] = useState(false)
+  const[seatClass, setSeatClass] = useState("seat")
+
+
+  return(
+  <>
+    <div className="seat" onClick={() => setSeatStatus(!seatStatus)}>{name}</div> 
+  </>
+  )
+    
+
+}
+
+// function Seat({seatList}){
+//   const[seatStatus, setSeatStatus] = useState(false)
+//   const[seatClass, setSeatClass] = useState("seat")
+
+
+//   return(
+//   <>
+//       seat.isAvailable ? 
+//         <div key={seat.id} className="seat" onClick={() => setSeatStatus(!seatStatus)}>{seat.name}</div> 
+//       : 
+//         <div key={seat.id} className="seat unavailable" onClick={() => alert("esse assento não, jão!")}>{seat.name}</div>
+//   </>
+//   )
+    
+
+// }

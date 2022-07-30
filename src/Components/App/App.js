@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import "../../assets/css/reset.css"
 import "./style.css"
@@ -6,6 +7,7 @@ import MovieSessions from "../MovieSessions/MovieSessions"
 import SeatsPage from "../SeatsPage/SeatsPage"
 
 export default function App(){
+  const [movies, setMovies] = useState([])
 
 
   return (
@@ -17,8 +19,8 @@ export default function App(){
         <main>
           <Routes>
             <Route path="/" element={<MovieListing />} />
-            <Route path="/sessoes/:idFilme" element={<MovieSessions />} />
-            <Route path="/assentos" element={<SeatsPage />} />
+            <Route path="/sessoes/:idFilme" element={<MovieSessions  movies={movies} setMovies={setMovies} />} />
+            <Route path="/assentos/:idSessao" element={<SeatsPage />} />
           </Routes>
         </main>
       </BrowserRouter>

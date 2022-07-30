@@ -4,12 +4,10 @@ import Footer from "../Footer/Footer.js"
 import { useParams, Link } from "react-router-dom"
 import axios from "axios"
 
-export default function MovieSessions(){
+export default function MovieSessions({movies, setMovies}){
   const {idFilme} = useParams()
   const [timetable, setTimetable] = useState([])
-  const [movies, setMovies] = useState([])
 
-  console.log(timetable)
 
   useEffect(() => {
     
@@ -47,17 +45,19 @@ function Session(
   date,
   firstSession,
   lastSession,
-  movieId}){
+  firstSessionId,
+  lastSessionId
+  }){
 
   return (
     
       <div className="session">
         <h3>{`${weekday} - ${date}`}</h3>
         <div className="schedule">
-          <Link to={`/assentos/${movieId}`}>
+          <Link to={`/assentos/${firstSessionId}`}>
             <div className="timeSession">{firstSession}</div>
           </Link>
-          <Link to="/assentos">
+          <Link to={`/assentos/${lastSessionId}`}>
             <div className="timeSession">{lastSession}</div>
           </Link>
         </div>

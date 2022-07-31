@@ -1,15 +1,6 @@
-.subtitle {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-}
 
 .seats{
   width: 100%;
-  height: 300px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -40,7 +31,6 @@
 .seatsSubtitle{
   width: 100%;
   max-width: 325px;
-  height: 100px;
   display: flex;
   justify-content: space-evenly;
 }
@@ -69,4 +59,3 @@
   background-color: #FBE192;
   border: 1px solid #F7C52B;
 }
-

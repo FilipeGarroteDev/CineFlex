@@ -18,7 +18,8 @@ export default function MovieSessions({movies, setMovies}){
     })
   }, [])
 
-  return (<>
+  return (
+  <div className="wrapper">
     <div className="subtitle">
       <h2>Selecione o horário</h2>
     </div>
@@ -37,7 +38,8 @@ export default function MovieSessions({movies, setMovies}){
       })}
     </div>
     <Footer title={movies.title} posterURL={movies.posterURL} />
-  </>)
+  </div>
+  )
 }
 
 function Session(

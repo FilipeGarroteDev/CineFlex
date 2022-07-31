@@ -27,3 +27,7 @@ header {
   justify-content: center;
   align-items: center;
 }
+
+.wrapper{
+  margin-bottom: 135px;
+}

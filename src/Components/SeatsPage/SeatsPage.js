@@ -1,8 +1,9 @@
 import "./style.css"
 import {useState, useEffect} from "react"
 import Footer from "../Footer/Footer.js"
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import axios from "axios"
+import Form from "../Form/Form"
 
 
 
@@ -10,6 +11,7 @@ export default function SeatsPage(){
   const {idSessao} = useParams();
   const[seatList, setSeatList] = useState([]);
   const[movie, setMovie] = useState([])
+  const arrayAux = []
 
   useEffect(() => {
     const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`)
@@ -20,8 +22,8 @@ export default function SeatsPage(){
   }, [])
   
 
-
-  return (<>
+  return (
+  <div className="wrapper">
     <div className="subtitle">
       <h2>Selecione o horário</h2>
     </div>
@@ -29,13 +31,12 @@ export default function SeatsPage(){
       <ul className="seatMaps">
       {seatList.map(({id, name, isAvailable}) => 
         isAvailable ? 
-          <SeatAvailable key={id} name={name} isAvailable={isAvailable}/> 
+          <SeatAvailable key={id} name={name} id={id} isAvailable={isAvailable} arrayAux={arrayAux}/> 
         :
-          <SeatUnavailable key={id} name={name} isAvailable={isAvailable}/>)
+          <SeatUnavailable key={id} name={name}/>)
       }
       </ul>
-      
-      <label className="seatsSubtitle">
+      <div className="seatsSubtitle">
         <div className="option">
           <div className="seat selected"></div>
           <span>Selecionado</span>
@@ -48,26 +49,42 @@ export default function SeatsPage(){
           <div className="seat unavailable"></div>
           <span>Indisponível</span>
         </div>
-      </label>
+      </div>
     </div>
+    <Form arrayAux={arrayAux}/>
     <Footer title={movie.title} posterURL={movie.posterURL}/>
-  </>)
+  </div>
+  )
 }
 
-function SeatAvailable({name}){
-  const[seatStatus, setSeatStatus] = useState(false)
+function SeatAvailable({name, id, arrayAux}){
   const[seatClass, setSeatClass] = useState("seat")
+  const[seatStatus, setSeatStatus] = useState(false)
+
+  function createSeatsArray(){
+    if(!seatStatus){
+      setSeatClass("seat selected")
+      if(!arrayAux.includes(id)) arrayAux.push(id)
+    } else {
+      setSeatClass("seat")
+      if(arrayAux.includes(id)){
+        let index = arrayAux.indexOf(id)
+        arrayAux.splice(index, 1)
+        }
+    }
+  }
 
   return(
   <>
-    <div className={seatClass} onClick={() => setSeatClass("seat selected")}>{name}</div> 
+    <div className={seatClass} onClick={() => {
+      setSeatStatus(!seatStatus)
+      createSeatsArray()    
+      }}>{name}</div> 
   </>
   )
 }
 
 function SeatUnavailable({name}){
-  const[seatStatus, setSeatStatus] = useState(false)
-  const[seatClass, setSeatClass] = useState("seat")
 
   return(
   <>

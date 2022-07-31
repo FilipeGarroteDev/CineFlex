@@ -5,9 +5,11 @@ import "./style.css"
 import MovieListing from "../MovieListing/MovieListing"
 import MovieSessions from "../MovieSessions/MovieSessions"
 import SeatsPage from "../SeatsPage/SeatsPage"
+import SuccessPage from "../SuccessPage/SuccessPage"
 
 export default function App(){
   const [movies, setMovies] = useState([])
+  const [successObject, setSuccessObject] = useState({})
 
 
   return (
@@ -18,9 +20,10 @@ export default function App(){
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<MovieListing />} />
-            <Route path="/sessoes/:idFilme" element={<MovieSessions  movies={movies} setMovies={setMovies} />} />
-            <Route path="/assentos/:idSessao" element={<SeatsPage />} />
+            <Route path="/" element={<MovieListing setSuccessObject={setSuccessObject}/>} />
+            <Route path="/sessoes/:idFilme" element={<MovieSessions  movies={movies} setMovies={setMovies} successObject={successObject} setSuccessObject={setSuccessObject}/>} />
+            <Route path="/assentos/:idSessao" element={<SeatsPage successObject={successObject} setSuccessObject={setSuccessObject} />} />
+            <Route path="/sucesso" element={<SuccessPage successObject={successObject}/>} />
           </Routes>
         </main>
       </BrowserRouter>

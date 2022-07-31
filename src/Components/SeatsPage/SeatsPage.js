@@ -7,7 +7,7 @@ import Form from "../Form/Form"
 
 
 
-export default function SeatsPage(){
+export default function SeatsPage({successObject, setSuccessObject}){
   const {idSessao} = useParams();
   const[seatList, setSeatList] = useState([]);
   const[movie, setMovie] = useState([])
@@ -23,7 +23,7 @@ export default function SeatsPage(){
   
 
   return (
-  <div className="wrapper">
+  <>
     <div className="subtitle">
       <h2>Selecione o horário</h2>
     </div>
@@ -51,9 +51,9 @@ export default function SeatsPage(){
         </div>
       </div>
     </div>
-    <Form arrayAux={arrayAux}/>
+    <Form arrayAux={arrayAux} successObject={successObject} setSuccessObject={setSuccessObject}/>
     <Footer title={movie.title} posterURL={movie.posterURL}/>
-  </div>
+  </>
   )
 }
 
@@ -64,11 +64,11 @@ function SeatAvailable({name, id, arrayAux}){
   function createSeatsArray(){
     if(!seatStatus){
       setSeatClass("seat selected")
-      if(!arrayAux.includes(id)) arrayAux.push(id)
+      if(arrayAux.filter(obj => obj.id === id).length === 0) arrayAux.push({id, name})
     } else {
       setSeatClass("seat")
-      if(arrayAux.includes(id)){
-        let index = arrayAux.indexOf(id)
+      if(arrayAux.filter(obj => obj.id === id).length > 0){
+        let index = arrayAux.findIndex(obj => obj.id === id)
         arrayAux.splice(index, 1)
         }
     }

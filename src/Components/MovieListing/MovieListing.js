@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-export default function MovieListing(){ 
+export default function MovieListing({setSuccessObject}){ 
   const [movies, setMovies] = useState([])
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function MovieListing(){
       <div className="movieContainer">
           {movies.length === 0 ? <h1>carregando...</h1> : movies.map(({posterURL, title, id}) => {
             return(
-              <Movie key={id} posterURL={posterURL} title={title} id={id} />
+              <Movie key={id} posterURL={posterURL} title={title} id={id} setSuccessObject={setSuccessObject}/>
             )
           })}
       </div>
@@ -29,9 +29,9 @@ export default function MovieListing(){
   )
 }
 
-function Movie({posterURL, title, id}){
+function Movie({posterURL, title, id, setSuccessObject}){
   return(
-    <Link to={`/sessoes/${id}`}>
+    <Link to={`/sessoes/${id}`} onClick={() => {setSuccessObject({title})}}>
       <div className="movie">
         <img src={posterURL} alt={title}/>
       </div>

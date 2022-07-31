@@ -3,20 +3,30 @@ import {useState} from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
-export default function Form(arrayAux){
+export default function Form({arrayAux, successObject, setSuccessObject}){
   const [name, setName] = useState("")
   const [userDoc, setUserDoc] = useState("")
+  const navigate = useNavigate();
 
   function handleForm(event){
     event.preventDefault();
     const userObject ={
+      ids: arrayAux.map(obj => obj.id),
       name,
-      userDoc,
-      ids: arrayAux
+      cpf: userDoc,
     }
 
-    console.log(userObject)
+    setSuccessObject({
+      ...successObject,
+      seat: arrayAux.map(obj => obj.name),
+      name,
+      userDoc
+    })
 
+    const promise = axios.post("https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many", userObject)
+    promise.then((res) => {
+      navigate("/sucesso")
+    })
   }
 
   return (

@@ -4,10 +4,9 @@ import Footer from "../Footer/Footer.js"
 import { useParams, Link } from "react-router-dom"
 import axios from "axios"
 
-export default function MovieSessions({movies, setMovies}){
+export default function MovieSessions({movies, setMovies, successObject, setSuccessObject}){
   const {idFilme} = useParams()
   const [timetable, setTimetable] = useState([])
-
 
   useEffect(() => {
     
@@ -34,6 +33,8 @@ export default function MovieSessions({movies, setMovies}){
             lastSession={lastSession} 
             lastSessionId ={lastSessionId}
             movieId={movies.id}
+            successObject={successObject}
+            setSuccessObject={setSuccessObject}
           />)
       })}
     </div>
@@ -48,7 +49,9 @@ function Session(
   firstSession,
   lastSession,
   firstSessionId,
-  lastSessionId
+  lastSessionId,
+  successObject,
+  setSuccessObject
   }){
 
   return (
@@ -56,10 +59,18 @@ function Session(
       <div className="session">
         <h3>{`${weekday} - ${date}`}</h3>
         <div className="schedule">
-          <Link to={`/assentos/${firstSessionId}`}>
+          <Link to={`/assentos/${firstSessionId}`} onClick={() => {setSuccessObject({
+            ...successObject,
+            date,
+            session: firstSession
+          })}}>
             <div className="timeSession">{firstSession}</div>
           </Link>
-          <Link to={`/assentos/${lastSessionId}`}>
+          <Link to={`/assentos/${lastSessionId}`}  onClick={() => {setSuccessObject({
+            ...successObject,
+            date,
+            session: lastSession
+          })}}>
             <div className="timeSession">{lastSession}</div>
           </Link>
         </div>

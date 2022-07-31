@@ -62,14 +62,16 @@ function Session(
           <Link to={`/assentos/${firstSessionId}`} onClick={() => {setSuccessObject({
             ...successObject,
             date,
-            session: firstSession
+            session: firstSession,
+            weekday
           })}}>
             <div className="timeSession">{firstSession}</div>
           </Link>
           <Link to={`/assentos/${lastSessionId}`}  onClick={() => {setSuccessObject({
             ...successObject,
             date,
-            session: lastSession
+            session: lastSession,
+            weekday
           })}}>
             <div className="timeSession">{lastSession}</div>
           </Link>

@@ -52,7 +52,9 @@ export default function SeatsPage({successObject, setSuccessObject}){
       </div>
     </div>
     <Form arrayAux={arrayAux} successObject={successObject} setSuccessObject={setSuccessObject}/>
-    <Footer title={movie.title} posterURL={movie.posterURL}/>
+    <Footer title={movie.title} posterURL={movie.posterURL}>
+      <h6>{`${successObject.weekday} - ${successObject.session}`}</h6>  
+    </Footer>
   </>
   )
 }

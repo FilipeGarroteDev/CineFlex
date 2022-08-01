@@ -31,6 +31,7 @@ export default function Form({arrayAux, successObject, setSuccessObject, setSwit
       setName("");
       setUserDoc("");
       setSwitchHeader(false);
+      arrayAux = [];
       navigate("/sucesso")
       })
     }

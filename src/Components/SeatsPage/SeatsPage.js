@@ -4,7 +4,7 @@ import Footer from "../Footer/Footer.js"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import Form from "../Form/Form"
-const arrayAux = []
+let arrayAux = []
 
 export default function SeatsPage({successObject, setSuccessObject, setSwitchHeader}){
   const {idSessao} = useParams();
@@ -14,6 +14,7 @@ export default function SeatsPage({successObject, setSuccessObject, setSwitchHea
 
 
   useEffect(() => {
+    arrayAux = []
     const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`)
     promise.then(res => {
       setSeatList(res.data.seats)

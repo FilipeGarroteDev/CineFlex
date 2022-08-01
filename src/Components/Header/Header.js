@@ -1,5 +1,5 @@
 import "./style.css"
-import { useNavigate, useLocation, useParams } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 
 export default function Header({setSwitchHeader, parameter}){
 

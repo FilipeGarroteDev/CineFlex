@@ -11,6 +11,7 @@ export default function SeatsPage({successObject, setSuccessObject, setSwitchHea
   const {idSessao} = useParams();
   const[seatList, setSeatList] = useState([]);
   const[movie, setMovie] = useState([])
+  const [errorMessage, setErrorMessage] = useState("errorMessage hidden");
   const arrayAux = []
 
   useEffect(() => {
@@ -19,13 +20,17 @@ export default function SeatsPage({successObject, setSuccessObject, setSwitchHea
       setSeatList(res.data.seats)
       setMovie(res.data.movie)
     })
-  }, [])
+  }, [idSessao])
   
 
   return (
-  <>
+  <div className="wrapper">
     <div className="subtitle">
       <h2>Selecione o horário</h2>
+    </div>
+    <div className={errorMessage}>
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      <p>Infelizmente, esse assento não está disponível. Escolha outro assento!</p>
     </div>
     <div className="seats">
       <ul className="seatMaps">
@@ -33,7 +38,7 @@ export default function SeatsPage({successObject, setSuccessObject, setSwitchHea
         isAvailable ? 
           <SeatAvailable key={id} name={name} id={id} isAvailable={isAvailable} arrayAux={arrayAux}/> 
         :
-          <SeatUnavailable key={id} name={name}/>)
+          <SeatUnavailable key={id} name={name} setErrorMessage={setErrorMessage} errorMessage={errorMessage}/>)
       }
       </ul>
       <div className="seatsSubtitle">
@@ -55,7 +60,7 @@ export default function SeatsPage({successObject, setSuccessObject, setSwitchHea
     <Footer title={movie.title} posterURL={movie.posterURL}>
       <h6>{`${successObject.weekday} - ${successObject.session}`}</h6>  
     </Footer>
-  </>
+  </div>
   )
 }
 
@@ -86,11 +91,16 @@ function SeatAvailable({name, id, arrayAux}){
   )
 }
 
-function SeatUnavailable({name}){
+function SeatUnavailable({name, setErrorMessage, errorMessage}){
 
   return(
   <>
-    <div className="seat unavailable" onClick={() => alert("sai daí, jão")}>{name}</div> 
+    <div className="seat unavailable" onClick={() => {
+      if(errorMessage === "errorMessage hidden"){
+        setErrorMessage("errorMessage");
+        setTimeout(() => setErrorMessage("errorMessage hidden"), 1500)
+      }      
+      }}>{name}</div> 
   </>
   )
 }

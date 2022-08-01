@@ -15,6 +15,7 @@ body{
 
 main{
   padding: 0 23px;
+  margin-top: 67px;
 }
 
 header {
@@ -34,10 +35,6 @@ header > ion-icon{
   position: absolute;
   top: calc(50%-24px);
   left: 20px;
-}
-
-.enabled{
-  display: none;
 }
 
 .wrapper{

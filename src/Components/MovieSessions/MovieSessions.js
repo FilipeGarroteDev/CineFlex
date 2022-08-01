@@ -16,7 +16,7 @@ export default function MovieSessions({movies, setMovies, successObject, setSucc
       setMovies(res.data)
       setTimetable(res.data.days)
     })
-  }, [])
+  }, [idFilme, setMovies, setTimetable, setParameter])
 
   return (
   <div className="wrapper">

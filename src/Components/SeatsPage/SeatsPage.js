@@ -4,15 +4,14 @@ import Footer from "../Footer/Footer.js"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import Form from "../Form/Form"
-
-
+const arrayAux = []
 
 export default function SeatsPage({successObject, setSuccessObject, setSwitchHeader}){
   const {idSessao} = useParams();
   const[seatList, setSeatList] = useState([]);
   const[movie, setMovie] = useState([])
   const [errorMessage, setErrorMessage] = useState("errorMessage hidden");
-  const arrayAux = []
+
 
   useEffect(() => {
     const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`)
@@ -26,7 +25,7 @@ export default function SeatsPage({successObject, setSuccessObject, setSwitchHea
   return (
   <div className="wrapper">
     <div className="subtitle">
-      <h2>Selecione o horário</h2>
+      <h2>Selecione os assento(s)</h2>
     </div>
     <div className={errorMessage}>
       <ion-icon name="alert-circle-outline"></ion-icon>
@@ -34,7 +33,13 @@ export default function SeatsPage({successObject, setSuccessObject, setSwitchHea
     </div>
     <div className="seats">
       <ul className="seatMaps">
-      {seatList.map(({id, name, isAvailable}) => 
+      {seatList.length === 0 ? 
+        <div className="loading">
+          <img src="https://img.freepik.com/vetores-premium/pipoca-em-vetor-de-desenho-de-balde-listrado-ilustracao-em-um-fundo-branco_223337-4014.jpg?w=2000" alt="popcorn"/>
+          <h1>Carregando...</h1> 
+        </div>
+        :
+        seatList.map(({id, name, isAvailable}) => 
         isAvailable ? 
           <SeatAvailable key={id} name={name} id={id} isAvailable={isAvailable} arrayAux={arrayAux}/> 
         :

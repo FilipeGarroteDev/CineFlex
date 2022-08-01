@@ -9,7 +9,7 @@ export default function MovieListing({setSuccessObject, setSwitchHeader}){
   useEffect(() => {
     const promise = axios.get("https://mock-api.driven.com.br/api/v7/cineflex/movies")
     promise.then((res) => {
-      setMovies(res.data)
+      setTimeout(() => setMovies(res.data), 350)
     })
   }, [])
 
@@ -19,11 +19,17 @@ export default function MovieListing({setSuccessObject, setSwitchHeader}){
         <h2>Selecione o filme</h2>
       </div>
       <div className="movieContainer">
-          {movies.length === 0 ? <h1>carregando...</h1> : movies.map(({posterURL, title, id}) => {
-            return(
-              <Movie key={id} posterURL={posterURL} title={title} id={id} setSuccessObject={setSuccessObject} setSwitchHeader={setSwitchHeader}/>
-            )
-          })}
+          {movies.length === 0 ? 
+            <div className="loading">
+              <img src="https://img.freepik.com/vetores-premium/pipoca-em-vetor-de-desenho-de-balde-listrado-ilustracao-em-um-fundo-branco_223337-4014.jpg?w=2000" alt="popcorn"/>
+              <h1>Carregando...</h1> 
+            </div>
+            : 
+            movies.map(({posterURL, title, id}) => {
+              return(
+                <Movie key={id} posterURL={posterURL} title={title} id={id} setSuccessObject={setSuccessObject} setSwitchHeader={setSwitchHeader}/>
+              )
+            })}
       </div>
     </>
   )

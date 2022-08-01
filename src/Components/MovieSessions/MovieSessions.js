@@ -14,7 +14,7 @@ export default function MovieSessions({movies, setMovies, successObject, setSucc
     const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/movies/${idFilme}/showtimes`)
     promise.then((res) => {
       setMovies(res.data)
-      setTimetable(res.data.days)
+      setTimeout(() => setTimetable(res.data.days), 350)
     })
   }, [idFilme, setMovies, setTimetable, setParameter])
 
@@ -24,8 +24,15 @@ export default function MovieSessions({movies, setMovies, successObject, setSucc
       <h2>Selecione o horário</h2>
     </div>
     <div className="sessions">
-      {timetable.map(({weekday, date, id, showtimes: [{name: firstSession, id: firstSessionId}, {name: lastSession, id: lastSessionId}]}) => {
-          return (<Session
+      {timetable.length === 0 ? 
+        <div className="loading">
+          <img src="https://img.freepik.com/vetores-premium/pipoca-em-vetor-de-desenho-de-balde-listrado-ilustracao-em-um-fundo-branco_223337-4014.jpg?w=2000" alt="popcorn"/>
+          <h1>Carregando...</h1> 
+        </div>
+        :
+          timetable.map(({weekday, date, id, showtimes: [{name: firstSession, id: firstSessionId}, {name: lastSession, id: lastSessionId}]}) => {
+          return (
+          <Session
             key = {id} 
             weekday={weekday} 
             date={date} 

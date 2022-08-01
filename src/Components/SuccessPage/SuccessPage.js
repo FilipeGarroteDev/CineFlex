@@ -2,7 +2,7 @@ import "./style.css"
 import { useNavigate } from "react-router-dom"
 
 
-export default function SuccessPage({successObject}){
+export default function SuccessPage({successObject, setSuccessObject}){
   const {
     title,
     date,
@@ -24,7 +24,10 @@ export default function SuccessPage({successObject}){
         <Tickets seat={seat}/>
       </DetailsSection>
       <DetailsSection sectionClass="userDetails" sectionTitle="Comprador" firstInfo={`Nome: ${name}`} secondInfo={`CPF: ${userDoc}`}/>
-      <button onClick={() => navigate("/")}>Voltar pra Home</button>
+      <button onClick={() =>{ 
+        setSuccessObject({})
+        navigate("/")
+        }}>Voltar pra Home</button>
     </div>
   )
 }
@@ -45,7 +48,7 @@ function Tickets({seat}){
     <>
       {seat
       .sort((a, b) => a-b)
-      .map((position) => <span>Assento {position}</span>)
+      .map((position) => <span key={position}>Assento {position}</span>)
       }
     </>
   )

@@ -23,7 +23,7 @@ export default function App(){
             <Route path="/" element={<MovieListing setSuccessObject={setSuccessObject}/>} />
             <Route path="/sessoes/:idFilme" element={<MovieSessions  movies={movies} setMovies={setMovies} successObject={successObject} setSuccessObject={setSuccessObject}/>} />
             <Route path="/assentos/:idSessao" element={<SeatsPage successObject={successObject} setSuccessObject={setSuccessObject} />} />
-            <Route path="/sucesso" element={<SuccessPage successObject={successObject}/>} />
+            <Route path="/sucesso" element={<SuccessPage successObject={successObject} setSuccessObject={setSuccessObject}/>} />
           </Routes>
         </main>
       </BrowserRouter>

@@ -3,7 +3,7 @@ import {useState} from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
-export default function Form({arrayAux, successObject, setSuccessObject}){
+export default function Form({arrayAux, successObject, setSuccessObject, setSwitchHeader}){
   const [name, setName] = useState("")
   const [userDoc, setUserDoc] = useState("")
   const navigate = useNavigate();
@@ -30,6 +30,7 @@ export default function Form({arrayAux, successObject, setSuccessObject}){
       promise.then((res) => {
       setName("");
       setUserDoc("");
+      setSwitchHeader(false);
       navigate("/sucesso")
       })
     }

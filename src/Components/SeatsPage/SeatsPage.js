@@ -7,7 +7,7 @@ import Form from "../Form/Form"
 
 
 
-export default function SeatsPage({successObject, setSuccessObject}){
+export default function SeatsPage({successObject, setSuccessObject, setSwitchHeader}){
   const {idSessao} = useParams();
   const[seatList, setSeatList] = useState([]);
   const[movie, setMovie] = useState([])
@@ -51,7 +51,7 @@ export default function SeatsPage({successObject, setSuccessObject}){
         </div>
       </div>
     </div>
-    <Form arrayAux={arrayAux} successObject={successObject} setSuccessObject={setSuccessObject}/>
+    <Form arrayAux={arrayAux} successObject={successObject} setSuccessObject={setSuccessObject} setSwitchHeader={setSwitchHeader}/>
     <Footer title={movie.title} posterURL={movie.posterURL}>
       <h6>{`${successObject.weekday} - ${successObject.session}`}</h6>  
     </Footer>

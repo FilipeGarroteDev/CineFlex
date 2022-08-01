@@ -4,12 +4,13 @@ import Footer from "../Footer/Footer.js"
 import { useParams, Link } from "react-router-dom"
 import axios from "axios"
 
-export default function MovieSessions({movies, setMovies, successObject, setSuccessObject}){
+export default function MovieSessions({movies, setMovies, successObject, setSuccessObject, setParameter, parameter}){
   const {idFilme} = useParams()
   const [timetable, setTimetable] = useState([])
 
+
   useEffect(() => {
-    
+    setParameter(idFilme)
     const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/movies/${idFilme}/showtimes`)
     promise.then((res) => {
       setMovies(res.data)

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-export default function MovieListing({setSuccessObject}){ 
+export default function MovieListing({setSuccessObject, setSwitchHeader}){ 
   const [movies, setMovies] = useState([])
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function MovieListing({setSuccessObject}){
       <div className="movieContainer">
           {movies.length === 0 ? <h1>carregando...</h1> : movies.map(({posterURL, title, id}) => {
             return(
-              <Movie key={id} posterURL={posterURL} title={title} id={id} setSuccessObject={setSuccessObject}/>
+              <Movie key={id} posterURL={posterURL} title={title} id={id} setSuccessObject={setSuccessObject} setSwitchHeader={setSwitchHeader}/>
             )
           })}
       </div>
@@ -29,9 +29,12 @@ export default function MovieListing({setSuccessObject}){
   )
 }
 
-function Movie({posterURL, title, id, setSuccessObject}){
+function Movie({posterURL, title, id, setSuccessObject, setSwitchHeader}){
   return(
-    <Link to={`/sessoes/${id}`} onClick={() => {setSuccessObject({title})}}>
+    <Link to={`/sessoes/${id}`} onClick={() => {
+      setSwitchHeader(true)
+      setSuccessObject({title})
+      }}>
       <div className="movie">
         <img src={posterURL} alt={title}/>
       </div>

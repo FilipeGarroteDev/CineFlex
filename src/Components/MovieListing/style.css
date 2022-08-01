@@ -27,6 +27,10 @@
   align-items: center;
 }
 
+.movie:hover{
+  filter: brightness(0.8)
+}
+
 .movie > img{
   width: 130px;
   height: 193px;

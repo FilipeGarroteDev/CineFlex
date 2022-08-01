@@ -40,4 +40,16 @@ button{
   margin-top: 40px;
   font-size: 18px;
   color: #FFFFFF;
+
+}
+
+button:hover{
+  filter: brightness(1.1);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+button:active{
+  border: 1px solid #d4610e;
+  font-weight: 500;
 }

@@ -18,3 +18,8 @@ header > ion-icon{
   top: calc(50% - 24px);
   left: 20px;
 }
+
+header > ion-icon:hover{
+  cursor: pointer;
+  filter: brightness(0.8);
+}

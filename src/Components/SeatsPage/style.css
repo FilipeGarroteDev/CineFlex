@@ -28,6 +28,11 @@
   margin: 0 3px 20px 3px;
 }
 
+.seatMaps .seat:hover{
+  cursor: pointer;
+  filter: brightness(0.8)
+}
+
 .seatsSubtitle{
   width: 100%;
   max-width: 325px;

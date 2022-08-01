@@ -3,7 +3,7 @@ import {useState} from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
-export default function Form({arrayAux, successObject, setSuccessObject, setSwitchHeader}){
+export default function Form({selectedSeats, successObject, setSuccessObject, setSwitchHeader}){
   const [name, setName] = useState("")
   const [userDoc, setUserDoc] = useState("")
   const navigate = useNavigate();
@@ -11,19 +11,19 @@ export default function Form({arrayAux, successObject, setSuccessObject, setSwit
   function handleForm(event){
     event.preventDefault();
     const userObject ={
-      ids: arrayAux.map(obj => obj.id),
+      ids: selectedSeats.map(obj => obj.id),
       name,
       cpf: userDoc,
     }
 
     setSuccessObject({
       ...successObject,
-      seat: arrayAux.map(obj => obj.name),
+      seat: selectedSeats.map(obj => obj.name),
       name,
       userDoc
     })
 
-    if(arrayAux.length === 0){
+    if(selectedSeats.length === 0){
       alert("Você precisa selecionar os seus assentos!")
     } else {
        const promise = axios.post("https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many", userObject)
@@ -31,7 +31,7 @@ export default function Form({arrayAux, successObject, setSuccessObject, setSwit
       setName("");
       setUserDoc("");
       setSwitchHeader(false);
-      arrayAux = [];
+      selectedSeats = [];
       navigate("/sucesso")
       })
     }
@@ -41,6 +41,7 @@ export default function Form({arrayAux, successObject, setSuccessObject, setSwit
   return (
   <>
     <form onSubmit={handleForm}>
+      {}
       <div>
         <p>Nome do Comprador:</p>
         <input type="text" placeholder="Digite seu nome..." value={name} onChange={(event) => setName(event.target.value)} required></input>

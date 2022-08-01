@@ -4,17 +4,16 @@ import Footer from "../Footer/Footer.js"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import Form from "../Form/Form"
-let arrayAux = []
 
 export default function SeatsPage({successObject, setSuccessObject, setSwitchHeader}){
   const {idSessao} = useParams();
   const[seatList, setSeatList] = useState([]);
   const[movie, setMovie] = useState([])
   const [errorMessage, setErrorMessage] = useState("errorMessage hidden");
+  const [selectedSeats, setSelectedSeats] = useState([])
 
 
   useEffect(() => {
-    arrayAux = []
     const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`)
     promise.then(res => {
       setSeatList(res.data.seats)
@@ -42,7 +41,7 @@ export default function SeatsPage({successObject, setSuccessObject, setSwitchHea
         :
         seatList.map(({id, name, isAvailable}) => 
         isAvailable ? 
-          <SeatAvailable key={id} name={name} id={id} isAvailable={isAvailable} arrayAux={arrayAux}/> 
+          <SeatAvailable key={id} name={name} id={id} isAvailable={isAvailable} selectedSeats={selectedSeats} setSelectedSeats={setSelectedSeats}/> 
         :
           <SeatUnavailable key={id} name={name} setErrorMessage={setErrorMessage} errorMessage={errorMessage}/>)
       }
@@ -62,7 +61,7 @@ export default function SeatsPage({successObject, setSuccessObject, setSwitchHea
         </div>
       </div>
     </div>
-    <Form arrayAux={arrayAux} successObject={successObject} setSuccessObject={setSuccessObject} setSwitchHeader={setSwitchHeader}/>
+    <Form selectedSeats={selectedSeats} successObject={successObject} setSuccessObject={setSuccessObject} setSwitchHeader={setSwitchHeader}/>
     <Footer title={movie.title} posterURL={movie.posterURL}>
       <h6>{`${successObject.weekday} - ${successObject.session}`}</h6>  
     </Footer>
@@ -70,20 +69,21 @@ export default function SeatsPage({successObject, setSuccessObject, setSwitchHea
   )
 }
 
-function SeatAvailable({name, id, arrayAux}){
+function SeatAvailable({name, id, selectedSeats, setSelectedSeats}){
   const[seatClass, setSeatClass] = useState("seat")
   const[seatStatus, setSeatStatus] = useState(false)
 
   function createSeatsArray(){
     if(!seatStatus){
       setSeatClass("seat selected")
-      if(arrayAux.filter(obj => obj.id === id).length === 0) arrayAux.push({id, name})
+      if(selectedSeats.filter(obj => obj.id === id).length === 0) setSelectedSeats([...selectedSeats, {name, id}])
     } else {
       setSeatClass("seat")
-      if(arrayAux.filter(obj => obj.id === id).length > 0){
-        let index = arrayAux.findIndex(obj => obj.id === id)
-        arrayAux.splice(index, 1)
-        }
+      if(selectedSeats.filter(obj => obj.id === id).length > 0){
+          let indexAux = selectedSeats.findIndex(obj => obj.id === id);
+          let filteredAux = selectedSeats.filter((pos, index) => index !== indexAux)
+          setSelectedSeats(filteredAux)
+      }
     }
   }
 

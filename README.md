@@ -3,7 +3,7 @@
 CineFlex is an web application to mobile dispositives with which the users can schedule your movie session. CineFlex show the list of movies that are on cinema and anyone can select the better day, session and seat. Come to try! :)
 
 <div align="center">
-  <img src="./cineflex.gif"/ alt="cineflex">
+  <img src="./src/assets/images/cineflex.gif"/ alt="cineflex">
 </div>
 
 Try it out now at https://projeto9-cineflex-gamma-six.vercel.app/

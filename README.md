@@ -10,7 +10,7 @@ Try it out now at https://projeto9-cineflex-gamma-six.vercel.app/
 
 ## About
 
-This is an web application to mobile dispositives with which lots of people can manage their own habits. Below are the implemented features:
+This is an web application to mobile dispositives with which users can have fun by choosing your favorite movie. Below are the implemented features:
 
 - List all movies
 - Select your favorite movie
